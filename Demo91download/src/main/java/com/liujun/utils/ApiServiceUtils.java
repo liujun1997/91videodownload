@@ -4,7 +4,7 @@ Date 2020-02-09
 Time 23:05
 Minute 05
 */
-
+import org.apache.http.HttpVersion;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -54,8 +54,11 @@ public  class ApiServiceUtils {
         HttpGet httpGet = new HttpGet(url);
 
         //设置连接超时时间
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(6000).setConnectTimeout(6000).build();//设置请求和传输超时时间
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(100000).setConnectTimeout(100000).build();//设置请求和传输超时时间
         httpGet.setConfig(requestConfig);
+
+        //设置请求头的语言是中文
+        httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
 
         CloseableHttpResponse response  =  null;
         try{
